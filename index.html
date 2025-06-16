@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <title>Atom</title>
 </head>
 <body>
@@ -20,17 +21,14 @@
                 </div>
             </div>
             <div class = "chat-box">
-                <div class = "atom-response">
+                <div class = "atom-response" id = "answer">
                     Hi there! I'm Atom! ⚛️ Ask me anything about science, space, or technology, and I'll explain it in a super simple way. What are you curious about today? 🤓
-                </div>
-                <div class = "user-response">
-                    Hi Atom🙂
                 </div>
             </div>
                     <div class = "input-container">
                         <form>
                             <input class = "question-input" type ="text" placeholder="Enter your question..." required autocomplete="off"/>
-                            <button class = "send-button" type="submit">
+                            <button class = "send-button" id = "send-button" type="submit">
                             <img src="images/send-msg.png" alt="Send message" />
                             </button>
                         </form>
