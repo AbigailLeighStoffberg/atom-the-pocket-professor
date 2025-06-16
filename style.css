@@ -36,7 +36,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: row;
-    background-color: #085F63;
+    background-color: #004548;
     color: #FCF4D9;
     padding: 10px;
     gap: 15px;
@@ -65,6 +65,20 @@ body {
     overflow-y: auto;
 }
 
+.chat-box::-webkit-scrollbar {
+    width: 10px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: #085F63;
+    border-radius: 5px;
+    border: 2px solid #8ED2C9;
+}
+
 .atom-response {
     background-color: #085F63;
     color: #FCF4D9;
@@ -75,6 +89,43 @@ body {
     max-width: 75%;
     box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.2);
     line-height: 26px;
+}
+
+.typing-indicator {
+    background-color: #085F63;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 20px;
+    align-self: flex-start;
+    align-items: center;
+    gap: 5px;
+    display: none; 
+    order: 99;
+}
+
+.typing-indicator span {
+    width: 10px;
+    height: 10px;
+    background-color: #8ED2C9;
+    border-radius: 50%;
+    animation: bounce 1.2s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-of-type(2) {
+    animation-delay: -1.0s;
+}
+
+.typing-indicator span:nth-of-type(3) {
+    animation-delay: -0.8s;
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1.0);
+    }
 }
 
 .user-response {
@@ -95,8 +146,8 @@ form {
 }
 
 .input-container {
-    background-color: #085F63;
-    padding: 15px;
+    background-color: #004548;
+    padding: 20px;
 }
 
 .question-input {
@@ -105,7 +156,7 @@ form {
     border-radius: 30px;
     padding: 20px;
     background-color: #FCF4D9;
-    color: #085F63;
+    color: #004548;
     font-size: 20px;
 
 }

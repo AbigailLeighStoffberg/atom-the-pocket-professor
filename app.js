@@ -1,63 +1,65 @@
 let form = document.querySelector("form");
 let questionInput = document.querySelector(".question-input");
 let chatBox = document.querySelector(".chat-box");
-
+let typingIndicator = document.querySelector("#typing-indicator");
 let conversationHistory = [];
 
 function showBotResponse(response) {
-    let botResponseText = response.data.answer;
+    typingIndicator.style.display = "none";
 
+    let botResponseText = response.data.answer;
+    
     conversationHistory.push({ role: "assistant", content: botResponseText });
 
-    const sentenceRegex = /[^.!?]+[.!?]/g;
-    const sentences = botResponseText.match(sentenceRegex);
+    let responseElement = document.createElement("div");
+    responseElement.classList.add("atom-response");
+    responseElement.innerHTML = botResponseText;
+    chatBox.appendChild(responseElement);
 
-    if (sentences) {
-        sentences.forEach((sentence, index) => {
-            setTimeout(() => {
-                let responseElement = document.createElement("div");
-                responseElement.classList.add("atom-response");
-                responseElement.innerHTML = sentence.trim();
-                chatBox.appendChild(responseElement);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, index * 1000);
-        });
-    } else {
-        let responseElement = document.createElement("div");
-        responseElement.classList.add("atom-response");
-        responseElement.innerHTML = botResponseText;
-        chatBox.appendChild(responseElement);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function getAnswer(event) {
+function handleFormSubmit(event) {
     event.preventDefault();
-
     let userQuestion = questionInput.value;
+
+    if (!userQuestion.trim()) {
+        return;
+    }
 
     let userResponseElement = document.createElement("div");
     userResponseElement.classList.add("user-response");
     userResponseElement.innerHTML = userQuestion;
     chatBox.appendChild(userResponseElement);
-    chatBox.scrollTop = chatBox.scrollHeight;
 
     conversationHistory.push({ role: "user", content: userQuestion });
-
-    let apiKey = "o0e08e5bc5b0e4ff55a41bb73c22t77e";
-    const personalityContext = `You are Atom, a friendly, enthusiastic, and super-smart robot science professor for kids (ages 10-16). You're funny and casual. You use emojis. Keep your ENTIRE response concise, under 100 words total.`;
     
-    let historyString = conversationHistory.map(message => {
-        return `${message.role}: ${message.content}`;
-    }).join('\n');
+    questionInput.value = "";
+    typingIndicator.style.display = "flex";
+    chatBox.scrollTop = chatBox.scrollHeight;
 
+    // --- Call the AI ---
+    let apiKey = "o0e08e5bc5b0e4ff55a41bb73c22t77e";
+    const personalityContext = `You are Atom, a friendly, enthusiastic, and super-smart robot science professor for kids (ages 10-16). You're funny and casual. You use emojis. Keep your ENTIRE response concise, under 80 words total. **Crucial rule: Do not end your responses with questions like 'Do you have another question?' or 'Can I help with anything else?'. End your answer naturally and wait for the user's next prompt.**`;
+    
+    let historyString = conversationHistory.map(message => `${message.role}: ${message.content}`).join('\n');
     let dynamicContext = `${personalityContext}\n\n--- Conversation History ---\n${historyString}`;
-    let prompt = userQuestion;
-    let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${dynamicContext}&key=${apiKey}`;
+    
+    let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${userQuestion}&context=${dynamicContext}&key=${apiKey}`;
 
     axios.get(apiUrl).then(showBotResponse);
-
-    questionInput.value = "";
 }
 
-form.addEventListener("submit", getAnswer);
+function showInitialGreeting() {
+    const greetingText = "Hi there! I'm Atom! ⚛️ Ask me anything about science, space, or technology, and I'll explain it in a super simple way. What are you curious about today? 🤓";
+    
+    let responseElement = document.createElement("div");
+    responseElement.classList.add("atom-response");
+    responseElement.innerHTML = greetingText;
+    chatBox.appendChild(responseElement);
+
+    conversationHistory.push({ role: "assistant", content: greetingText });
+}
+
+window.addEventListener("load", showInitialGreeting);
+form.addEventListener("submit", handleFormSubmit);
