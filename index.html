@@ -4,23 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href = "style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Atom</title>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Atom</h1>
-        <h2>Big questions. Simple answers.</h2>
-    </header>
-
-    <main>
-        <form>
-            <input type ="text" placeholder="Enter your question..." autofocus required autocomplete="off"/>
-            <input type = "submit" />
-        </form>
-        <div>
-            Answer Box will go here.
+    <div class = "page-wrapper">
+        <div class = "app-container">
+            <div class="chat-header">
+                <img class="logo" src="images/atom-pic.png" alt="Atom logo" />
+                <div class="header-text">
+                    <h1>Atom</h1>
+                    <h2 class="atom-status">Big questions. Simple answers.</h2>
+                </div>
+            </div>
+            <div class = "chat-box">
+                <div class = "atom-response">
+                    Hi there! I'm Atom! ⚛️ Ask me anything about science, space, or technology, and I'll explain it in a super simple way. What are you curious about today? 🤓
+                </div>
+                <div class = "user-response">
+                    Hi Atom🙂
+                </div>
+            </div>
+                    <div class = "input-container">
+                        <form>
+                            <input class = "question-input" type ="text" placeholder="Enter your question..." required autocomplete="off"/>
+                            <button class = "send-button" type="submit">
+                            <img src="images/send-msg.png" alt="Send message" />
+                            </button>
+                        </form>
+                    </div>
         </div>
-    </main>
+    </div>
 <footer>
     Coded by <a href = "https://github.com/AbigailLeighStoffberg" target="_blank">Abigail-Leigh Stoffberg</a>. Open-sourced on <a href = "https://github.com/AbigailLeighStoffberg/atom-the-pocket-professor" target = "_blank">Github</a> and hosted on <a href = "https://atom-big-questions-simple-answers.netlify.app/" target = "_blank">Netlify</a>
 </footer>
