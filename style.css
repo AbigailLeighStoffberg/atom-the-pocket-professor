@@ -44,7 +44,7 @@ body {
     background-color: #347474;
     color: #FFFFFF;
     /* Adjusted padding for header, incorporating safe-area-inset-top */
-    padding-top: max(10px, env(safe-area-inset-top));
+    padding-top: max(25px, env(safe-area-inset-top));
     /* Ensure header clears URL/status bar */
     padding-left: 10px;
     padding-right: 10px;
