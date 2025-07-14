@@ -157,10 +157,10 @@ form {
 .input-container {
     flex-shrink: 0;
     background-color: #FFBD59;
-    padding-top: 15px;
+    padding-top: 30px;
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom: max(15px, env(safe-area-inset-bottom));
+    padding-bottom: max(30px, env(safe-area-inset-bottom));
 }
 
 .question-input {
@@ -179,7 +179,7 @@ form {
 
 .question-input::placeholder {
     color: #39989D;
-    font-size: 18px;
+    font-size: 22px;
 }
 
 .send-button {
