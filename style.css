@@ -43,7 +43,12 @@ body {
     flex-direction: row;
     background-color: #347474;
     color: #FFFFFF;
-    padding: 10px;
+    /* Adjusted padding for header, incorporating safe-area-inset-top */
+    padding-top: max(10px, env(safe-area-inset-top));
+    /* Ensure header clears URL/status bar */
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
     gap: 15px;
     line-height: 20px;
     border-radius: 0;
@@ -154,17 +159,20 @@ form {
 
 .input-container {
     background-color: #FFBD59;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    /* Reduced base padding for a less "big" look */
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /* Keep safe area inset for bottom */
+    padding-bottom: max(15px, env(safe-area-inset-bottom));
 }
 
 .question-input {
     flex-grow: 1;
     border: none;
     border-radius: 30px;
-    padding: 25px;
+    /* Reduced padding for a less "big" input field */
+    padding: 18px;
     background-color: #FFFFFF;
     color: #004548;
     font-size: 18px;
@@ -182,3 +190,80 @@ form {
 .send-button {
     background: none;
     border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.send-button img {
+    width: 55px;
+    /* Slightly reduced width to match new input size better */
+}
+
+@media (max-width: 767.98px) {
+    .chat-header {
+        /* Mobile specific padding for header */
+        padding-top: max(8px, env(safe-area-inset-top));
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 8px;
+        gap: 10px;
+    }
+
+    .logo {
+        width: 50px;
+    }
+
+    .chat-header h1 {
+        font-size: 24px;
+    }
+
+    .atom-status {
+        font-size: 14px;
+        margin-top: -5px;
+    }
+
+    .chat-box {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .atom-response,
+    .user-response {
+        padding: 12px 18px;
+        font-size: 15px;
+        line-height: 22px;
+        max-width: 90%;
+    }
+
+    .typing-indicator {
+        padding: 12px 18px;
+    }
+
+    .typing-indicator span {
+        width: 8px;
+        height: 8px;
+    }
+
+    .input-container {
+        /* Mobile specific padding for input container */
+        padding-top: 12px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+
+    .question-input {
+        padding: 14px 18px;
+        /* Slightly reduced padding for mobile input */
+        font-size: 16px;
+    }
+
+    .question-input::placeholder {
+        font-size: 16px;
+    }
+
+    .send-button img {
+        width: 45px;
+        /* Adjusted for mobile */
+    }
+}
