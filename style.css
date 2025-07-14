@@ -1,69 +1,48 @@
 html {
     height: 100dvh;
-    /* Ensure html element fills the dynamic viewport height */
     height: 100vh;
     overflow: hidden;
-    /* Crucial: Prevent scrolling on the entire HTML document */
 }
 
 body {
     min-height: 100dvh;
-    /* Ensure body also fills dynamic viewport height */
     min-height: 100vh;
     margin: 0;
     font-family: "Roboto", sans-serif;
     background-color: #8ED2C9;
-    /* Your chosen background color */
     background-size: cover;
     background-attachment: fixed;
     overflow: hidden;
-    /* CRITICAL: Prevent scrolling on the body element */
-    /* No need for display: flex; flex-direction: column here if app-container is fixed */
 }
 
 .page-wrapper {
-    /* Since app-container will be position: fixed, page-wrapper becomes less critical for layout */
-    /* You might even be able to remove the .page-wrapper div from your HTML for simplicity */
     width: 100%;
     height: 100%;
-    /* Still ensures it takes up available space if not removed */
 }
 
 .app-container {
     position: fixed;
-    /* NEW: Fix the entire app container to the viewport */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-
     display: flex;
-    /* Keep flexbox for internal layout */
     flex-direction: column;
-    /* Stack children vertically */
     z-index: 1;
-    /* Ensure it's above any background elements */
-
     background-color: #8ED2C9;
-    /* Apply background to this fixed container */
     border-radius: 0;
     overflow: hidden;
-    /* Essential to clip content and prevent app-level scrollbars */
     box-shadow: none;
 }
 
 .chat-header {
-    /* This element is now a child of a fixed flex container, so it behaves normally within that */
     flex-shrink: 0;
-    /* Prevent header from shrinking if content is too large */
     display: flex;
     align-items: center;
     flex-direction: row;
     background-color: #347474;
     color: #FFFFFF;
-    /* Use padding-top to push content down from the top edge, accounting for safe area */
     padding-top: max(25px, env(safe-area-inset-top));
-    /* Generous padding to clear URL bar */
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
@@ -83,13 +62,11 @@ body {
 
 .chat-box {
     flex-grow: 1;
-    /* Crucial: takes all remaining vertical space */
     display: flex;
     flex-direction: column;
     padding: 20px;
     gap: 20px;
     overflow-y: auto;
-    /* THIS IS THE ONLY ELEMENT THAT SHOULD SCROLL VERTICALLY */
 }
 
 .chat-box::-webkit-scrollbar {
@@ -178,14 +155,11 @@ form {
 }
 
 .input-container {
-    /* This element is now a child of a fixed flex container, so it behaves normally within that */
     flex-shrink: 0;
-    /* Prevent input container from shrinking */
     background-color: #FFBD59;
     padding-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
-    /* Use padding-bottom to push content up from the bottom edge, accounting for safe area */
     padding-bottom: max(15px, env(safe-area-inset-bottom));
 }
 
@@ -217,4 +191,53 @@ form {
 
 .send-button img {
     width: 55px;
+}
+
+@media (max-width: 767.98px) {
+    .logo {
+        width: 50px;
+    }
+
+    .chat-header h1 {
+        font-size: 30px;
+    }
+
+    .atom-status {
+        font-size: 20px;
+        margin-top: -5px;
+    }
+
+    .chat-box {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .atom-response,
+    .user-response {
+        padding: 12px 18px;
+        font-size: 16px;
+        line-height: 22px;
+        max-width: 90%;
+    }
+
+
+    .input-container {
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+
+    .question-input {
+        padding: 16px 18px;
+        font-size: 18px;
+    }
+
+    .question-input::placeholder {
+        font-size: 18px;
+    }
+
+    .send-button img {
+        width: 45px;
+    }
 }
