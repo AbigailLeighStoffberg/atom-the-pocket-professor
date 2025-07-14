@@ -5,10 +5,11 @@ let typingIndicator = document.querySelector("#typing-indicator");
 let conversationHistory = [];
 
 function showBotResponse(response) {
-    typingIndicator.style.display = "none";
+    // Hide the typing indicator by adding the 'd-none' class
+    typingIndicator.classList.add("d-none");
 
     let botResponseText = response.data.answer;
-    
+
     conversationHistory.push({ role: "assistant", content: botResponseText });
 
     let responseElement = document.createElement("div");
@@ -33,18 +34,19 @@ function handleFormSubmit(event) {
     chatBox.appendChild(userResponseElement);
 
     conversationHistory.push({ role: "user", content: userQuestion });
-    
+
     questionInput.value = "";
-    typingIndicator.style.display = "flex";
+    // Show the typing indicator by removing the 'd-none' class
+    typingIndicator.classList.remove("d-none");
     chatBox.scrollTop = chatBox.scrollHeight;
 
     // --- Call the AI ---
-    let apiKey = "o0e08e5bc5b0e4ff55a41bb73c22t77e";
+    let apiKey = "o0e08e5bc5b0e4ff55a41bb73c22t77e"; // Consider moving this to an environment variable for production
     const personalityContext = `You are Atom, a friendly, enthusiastic, and super-smart robot science professor for kids (ages 10-16). You're funny and casual. You use emojis. Keep your ENTIRE response concise, under 80 words total. **Crucial rule: Do not end your responses with questions like 'Do you have another question?' or 'Can I help with anything else?'. End your answer naturally and wait for the user's next prompt.**`;
-    
+
     let historyString = conversationHistory.map(message => `${message.role}: ${message.content}`).join('\n');
     let dynamicContext = `${personalityContext}\n\n--- Conversation History ---\n${historyString}`;
-    
+
     let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${userQuestion}&context=${dynamicContext}&key=${apiKey}`;
 
     axios.get(apiUrl).then(showBotResponse);
@@ -52,7 +54,7 @@ function handleFormSubmit(event) {
 
 function showInitialGreeting() {
     const greetingText = "Hi there! I'm Atom! ⚛️ Ask me anything about science, space, or technology, and I'll explain it in a super simple way. What are you curious about today? 🤓";
-    
+
     let responseElement = document.createElement("div");
     responseElement.classList.add("atom-response");
     responseElement.innerHTML = greetingText;
